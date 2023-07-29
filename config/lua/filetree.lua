@@ -24,3 +24,5 @@ require('nvim-tree').setup({
     },
 })
 
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true

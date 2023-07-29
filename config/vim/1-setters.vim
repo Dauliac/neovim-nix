@@ -11,7 +11,6 @@ set hidden
 set guicursor=
 set scrolloff=0
 set signcolumn=yes
-set colorcolumn=80
 set undofile
 set incsearch
 set updatetime=50
@@ -20,7 +19,6 @@ set splitright
 set relativenumber
 set sessionoptions+=tabpages,globals
 set ignorecase
-set clipboard+=unnamedplus
 set noswapfile
 set laststatus=3
 set re=0

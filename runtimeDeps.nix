@@ -20,6 +20,7 @@ with pkgs; [
   # rust 
   rust-analyzer
   rustfmt
+  vscode-extensions.llvm-org.lldb-vscode
   # packages with results in /lib/node_modules/.bin must come at the end
   pyright
   nodePackages.dockerfile-language-server-nodejs

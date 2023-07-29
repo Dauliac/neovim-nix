@@ -1,5 +1,5 @@
 {
-  description = "TonyChG neovim flake";
+  description = "Dauliac neovim flake";
 
   inputs = {
     nixpkgs = {
@@ -13,6 +13,11 @@
 
     telescope-recent-files-src = {
       url = "github:smartpde/telescope-recent-files";
+      flake = false;
+    };
+
+    telescope-ghq-src = {
+      url = "github:nvim-telescope/telescope-ghq.nvim";
       flake = false;
     };
 
@@ -42,29 +47,90 @@
               src = inputs.lsplens-src;
               pkgs = prev;
             };
+
+            telescope-ghq = import ./packages/vimPlugins/telescopeGhq.nix {
+              src = inputs.telescope-ghq-src;
+              pkgs = prev;
+            };
           };
         };
 
-        overlayNeovimPrimaMateria = prev: final: {
-          neovimPrimaMateria = import ./packages/neovimPrimaMateria.nix {
+        overlayNeovimDauliac = prev: final: {
+          neovimDauliac = import ./packages/neovimDauliac.nix {
             pkgs = prev;
           };
         };
 
         pkgs = import inputs.nixpkgs {
           system = system;
-          overlays = [ overlayFlakeInputs overlayNeovimPrimaMateria ];
+          overlays = [ overlayFlakeInputs overlayNeovimDauliac ];
         };
+
+
+        formatterPackages = with pkgs; [
+          nixpkgs-fmt
+          alejandra
+          statix
+        ];
+        nvim = inputs.flake-utils.lib.mkApp { drv = self.packages.${system}.nvim; };
       in
       {
         packages = rec {
-          nvim = pkgs.neovimPrimaMateria;
+          nvim = pkgs.neovimDauliac;
           default = nvim;
         };
 
-        apps = rec {
-          nvim = inputs.flake-utils.lib.mkApp { drv = self.packages.${system}.nvim; };
-          default = nvim;
+        apps.default = nvim;
+
+        formatter = pkgs.writeShellApplication {
+          name = "normalise_nix";
+          runtimeInputs = formatterPackages;
+          text = ''
+            set -o xtrace
+            alejandra "$@"
+            nixpkgs-fmt "$@"
+            statix fix "$@"
+          '';
         };
+
+
+        checks = {
+          inherit nvim;
+          typos = pkgs.mkShell {
+            buildInputs = with pkgs; [ typos ];
+            shellHook = ''
+              typos .
+            '';
+          };
+          yamllint = pkgs.mkShell {
+            buildInputs = with pkgs; [ yamllint ];
+            shellHook = ''
+              yamllint .
+            '';
+          };
+          luaCheck = pkgs.mkShell {
+            buildInputs = with pkgs; [ luaPackages.luacheck ];
+            shellHook = ''
+              luacheck . --globals vim feedkey
+            '';
+          };
+        };
+
+        devShells.default = pkgs.mkShell
+          {
+            inputsFrom = builtins.attrValues self.checks.${system};
+
+            nativeBuildInputs = with pkgs;
+              [
+                lefthook
+                go-task
+              ]
+              ++ formatterPackages;
+
+            devShellHook = ''
+              task install
+            '';
+          };
+
       });
 }
