@@ -26,33 +26,43 @@
       flake = false;
     };
 
+    gitlab-nvim-src = {
+      url = "github:harrisoncramer/gitlab.nvim";
+      flake = false;
+    };
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
   };
 
-  outputs = inputs@{ self, ... }:
+  outputs = inputs @ { self, ... }:
     inputs.flake-utils.lib.eachDefaultSystem (system:
       let
         overlayFlakeInputs = prev: final: {
-          neovim = inputs.neovim.packages.${prev.system}.neovim;
+          inherit (inputs.neovim.packages.${prev.system}) neovim;
 
-          vimPlugins = final.vimPlugins // {
-            telescope-recent-files = import ./packages/vimPlugins/telescopeRecentFiles.nix {
-              src = inputs.telescope-recent-files-src;
-              pkgs = prev;
-            };
+          vimPlugins =
+            final.vimPlugins
+            // {
+              telescope-recent-files = import ./packages/vimPlugins/telescopeRecentFiles.nix {
+                src = inputs.telescope-recent-files-src;
+                pkgs = prev;
+              };
 
-            lsplens = import ./packages/vimPlugins/lsplens.nix {
-              src = inputs.lsplens-src;
-              pkgs = prev;
-            };
+              lsplens = import ./packages/vimPlugins/lsplens.nix {
+                src = inputs.lsplens-src;
+                pkgs = prev;
+              };
 
-            telescope-ghq = import ./packages/vimPlugins/telescopeGhq.nix {
-              src = inputs.telescope-ghq-src;
-              pkgs = prev;
+              telescope-ghq = import ./packages/vimPlugins/telescopeGhq.nix {
+                src = inputs.telescope-ghq-src;
+                pkgs = prev;
+              };
+              gitlab-nvim = import ./packages/vimPlugins/gitlab-nvim.nix {
+                src = inputs.gitlab-nvim-src;
+                pkgs = prev;
+              };
             };
-          };
         };
 
         overlayNeovimDauliac = prev: final: {
@@ -62,10 +72,9 @@
         };
 
         pkgs = import inputs.nixpkgs {
-          system = system;
+          inherit system;
           overlays = [ overlayFlakeInputs overlayNeovimDauliac ];
         };
-
 
         formatterPackages = with pkgs; [
           nixpkgs-fmt
@@ -93,7 +102,6 @@
           '';
         };
 
-
         checks = {
           inherit nvim;
           typos = pkgs.mkShell {
@@ -116,21 +124,21 @@
           };
         };
 
-        devShells.default = pkgs.mkShell
-          {
-            inputsFrom = builtins.attrValues self.checks.${system};
+        devShells.default =
+          pkgs.mkShell
+            {
+              inputsFrom = builtins.attrValues self.checks.${system};
 
-            nativeBuildInputs = with pkgs;
-              [
-                lefthook
-                go-task
-              ]
-              ++ formatterPackages;
+              nativeBuildInputs = with pkgs;
+                [
+                  lefthook
+                  go-task
+                ]
+                ++ formatterPackages;
 
-            devShellHook = ''
-              task install
-            '';
-          };
-
+              devShellHook = ''
+                task install
+              '';
+            };
       });
 }

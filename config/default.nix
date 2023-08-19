@@ -26,7 +26,11 @@ let
   sourceConfigFiles = files:
     builtins.concatStringsSep "\n" (builtins.map
       (file:
-        (if pkgs.lib.strings.hasSuffix "lua" file then "luafile" else "source")
+        (
+          if pkgs.lib.strings.hasSuffix "lua" file
+          then "luafile"
+          else "source"
+        )
         + " ${file}")
       files);
 
@@ -35,5 +39,4 @@ let
   luanix = nixFiles2ConfigFiles "luanix";
 in
 builtins.concatStringsSep "\n"
-  (builtins.map (configs: sourceConfigFiles configs) [ vim lua luanix ])
-
+  (builtins.map sourceConfigFiles [ vim lua luanix ])

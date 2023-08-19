@@ -33,6 +33,22 @@
         "type": "github"
       }
     },
+    "gitlab-nvim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691373782,
+        "narHash": "sha256-7f6pfLM1UPTqK/9q1CvJ6XEgkwpmlKywPtHAn4Le7TE=",
+        "owner": "harrisoncramer",
+        "repo": "gitlab.nvim",
+        "rev": "6ab8cfdc5597fd429ab6844a4b8bda776aff4ab0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "harrisoncramer",
+        "repo": "gitlab.nvim",
+        "type": "github"
+      }
+    },
     "lsplens-src": {
       "flake": false,
       "locked": {
@@ -75,11 +91,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1689945909,
-        "narHash": "sha256-167y1s9w4CV+CjetiTKZdhIeQS/OGCMfwK1DfWGPFRM=",
+        "lastModified": 1691432770,
+        "narHash": "sha256-e4gqnJ3DkeeLz7SIVark45CY5rjn1y2bsqD+bFZGdIA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "1708e6ad6340829bda29739ffa16a33c124cffd1",
+        "rev": "d1c39e165158ae91717d10692f55116c83ecb8b8",
         "type": "github"
       },
       "original": {
@@ -91,6 +107,7 @@
     "root": {
       "inputs": {
         "flake-utils": "flake-utils",
+        "gitlab-nvim-src": "gitlab-nvim-src",
         "lsplens-src": "lsplens-src",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",

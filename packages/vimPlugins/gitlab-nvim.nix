@@ -3,6 +3,6 @@
 ,
 }:
 pkgs.vimUtils.buildVimPlugin {
-  name = "lsplens";
+  name = "";
   inherit src;
 }

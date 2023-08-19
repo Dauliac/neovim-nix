@@ -1,6 +1,6 @@
 { pkgs }:
 with pkgs.vimPlugins; [
-  #  Style 
+  #  Style
   which-key-nvim
   nvim-web-devicons
   gruvbox-nvim
@@ -15,6 +15,9 @@ with pkgs.vimPlugins; [
   plenary-nvim
   sqlite-lua
   registers-nvim
+  lsp-colors-nvim
+  todo-comments-nvim
+  barbar-nvim
 
   # Edit
   ssr-nvim
@@ -52,15 +55,12 @@ with pkgs.vimPlugins; [
     ]
   ))
 
-
   vim-vsnip
-  # AI
   nvim-lspconfig
-  lspkind-nvim
   lsplens
-  # 
   nvim-treesitter-context
   diffview-nvim
+  null-ls-nvim
   # git
   lazygit-nvim
   gitsigns-nvim
@@ -82,7 +82,6 @@ with pkgs.vimPlugins; [
   lspkind-nvim
   lsp-format-nvim
   lsp-status-nvim
-  nvim-lspconfig
   vim-vsnip
   nvim-cmp
   cmp-nvim-lsp

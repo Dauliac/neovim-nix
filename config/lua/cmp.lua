@@ -1,4 +1,4 @@
-local cmp = require 'cmp'
+local cmp = require("cmp")
 
 require("copilot_cmp").setup()
 
@@ -34,42 +34,57 @@ cmp.setup({
         feedkey("<Plug>(vsnip-jump-prev)", "")
       end
     end, { "i", "s" }),
-    ['<CR>'] = cmp.mapping.confirm({
-      select = true
+    ["<CR>"] = cmp.mapping.confirm({
+      select = true,
     }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = {
     { name = "copilot",  group_index = 2 },
     { name = "nvim_lsp", group_index = 2 },
-    { name = 'vsnip',    group_index = 2 }, -- For vsnip users.
+    { name = "vsnip",    group_index = 2 }, -- For vsnip users.
     { name = "path",     group_index = 2 },
-    { name = 'emoji' },
+    { name = "emoji" },
   },
 })
 
 -- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
+cmp.setup.filetype("gitcommit", {
   sources = cmp.config.sources({
-    { name = 'git' },
+    { name = "git" },
   }, {
-    { name = 'buffer' },
-  })
+    { name = "buffer" },
+  }),
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline({ '/', '?' }, {
+cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
-    { name = 'buffer' }
-  }
+    { name = "buffer" },
+  },
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
+cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = "path" },
   }, {
-    { name = 'cmdline' }
-  })
+    { name = "cmdline" },
+  }),
+})
+
+local lspkind = require("lspkind")
+cmp.setup({
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = "symbol", -- show only symbol annotations
+      -- prevent the popup from showing more than provided characters
+      -- (e.g 50 will not show more than 50 characters)
+      maxwidth = 50,
+      -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char Instead
+      -- (must define maxwidth first)
+      ellipsis_char = "...",
+    }),
+  },
 })

@@ -15,15 +15,13 @@ let
       done
     '';
   };
-  neovimDauliacUnwrapped =
-    pkgs.wrapNeovim pkgs.neovim {
-      withNodeJs = true;
-      configure = {
-        inherit customRC;
-        packages.all.start = plugins;
-      };
+  neovimDauliacUnwrapped = pkgs.wrapNeovim pkgs.neovim {
+    withNodeJs = true;
+    configure = {
+      inherit customRC;
+      packages.all.start = plugins;
     };
-
+  };
 in
 pkgs.writeShellApplication {
   name = "nvim";

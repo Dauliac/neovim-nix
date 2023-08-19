@@ -1,5 +1,8 @@
-{ pkgs, src }:
+{ pkgs
+, src
+,
+}:
 pkgs.vimUtils.buildVimPlugin {
-  name = "telescope-recent-files";
+  name = "gitlab.nvim";
   inherit src;
 }
