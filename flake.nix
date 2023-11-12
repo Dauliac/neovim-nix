@@ -30,6 +30,12 @@
       url = "github:harrisoncramer/gitlab.nvim";
       flake = false;
     };
+
+    sonic-pi-vim-src = {
+      url = "github:dermusikman/sonicpi.vim";
+      flake = false;
+    };
+
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -62,6 +68,11 @@
                 src = inputs.gitlab-nvim-src;
                 pkgs = prev;
               };
+              sonic-pi-vim = import ./packages/vimPlugins/sonicpi-vim.nix {
+                src = inputs.sonic-pi-vim-src;
+                pkgs = prev;
+              };
+
             };
         };
 

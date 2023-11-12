@@ -111,8 +111,25 @@
         "lsplens-src": "lsplens-src",
         "neovim": "neovim",
         "nixpkgs": "nixpkgs",
+        "sonic-pi-vim-src": "sonic-pi-vim-src",
         "telescope-ghq-src": "telescope-ghq-src",
         "telescope-recent-files-src": "telescope-recent-files-src"
+      }
+    },
+    "sonic-pi-vim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1613576176,
+        "narHash": "sha256-1rg9YYl+wQaO6L0EZ7pm5zaSGLWfczYQ1oUl/4aCjIo=",
+        "owner": "dermusikman",
+        "repo": "sonicpi.vim",
+        "rev": "f7690e4073ddd853eef38ae3a6a49b00dd2fe672",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dermusikman",
+        "repo": "sonicpi.vim",
+        "type": "github"
       }
     },
     "systems": {
