@@ -9,7 +9,6 @@ with pkgs; [
   lazygit
   terraform-ls
   gopls
-  docker-compose-language-service
   vscode-langservers-extracted
   yaml-language-server
   lua-language-server
@@ -39,4 +38,8 @@ with pkgs; [
   nodePackages.prettier
   nodePackages.typescript
   nodePackages."@volar/vue-language-server"
+  # nulls
+  php83Packages.phan
+  php83Packages.phpcs
+  phpactor
 ]

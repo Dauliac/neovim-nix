@@ -1,29 +1,41 @@
 local function set_telescope_keymaps()
-  vim.api.nvim_set_keymap("n", "<leader>ff", "<Cmd>lua require('telescope.builtin').find_files()<CR>", {
-    desc = "Find filed",
-    noremap = true,
-    silent = true,
-  })
-  vim.api.nvim_set_keymap("n", "<leader>fg", "<Cmd>lua require('telescope.builtin').live_grep()<CR>", {
-    desc = "Find in files",
-    noremap = true,
-    silent = true,
-  })
-  vim.api.nvim_set_keymap("n", "<leader>fb", "<Cmd>lua require('telescope.builtin').buffers()<CR>", {
-    desc = "Find buffers",
-    noremap = true,
-    silent = true,
-  })
   vim.api.nvim_set_keymap("n", "<leader>fp", "<Cmd>lua require('telescope').extensions.ghq.list()<CR>", {
     desc = "Project explorer",
     noremap = true,
     silent = true,
   })
-
   vim.keymap.set({ "n", "x" }, "<leader>fr", function()
     require("telescope").extensions.refactoring.refactors()
   end, {
     desc = "Refactoring",
+  })
+end
+
+local function set_fzf_keymap()
+  vim.keymap.set("n", "<leader>ff", "<Cmd>lua require('fzf-lua').files()<CR>", {
+    desc = "Find files",
+    silent = true,
+    noremap = true,
+  })
+  vim.api.nvim_set_keymap("n", "<leader>fg", "<Cmd>lua require('fzf-lua').live_grep_glob()<CR>", {
+    desc = "Find inside files",
+    noremap = true,
+    silent = true,
+  })
+  vim.api.nvim_set_keymap("n", "<leader>fb", "<Cmd>lua require('fzf-lua').buffers()<CR>", {
+    desc = "Find buffers",
+    noremap = true,
+    silent = true,
+  })
+  vim.api.nvim_set_keymap("n", "<leader>fr", "<Cmd>lua require('fzf-lua').quickfix()<CR>", {
+    desc = "Find qwick fixes",
+    noremap = true,
+    silent = true,
+  })
+  vim.api.nvim_set_keymap("n", "<leader>ft", "<Cmd>lua require('fzf-lua').tabs()<CR>", {
+    desc = "Find tabs",
+    noremap = true,
+    silent = true,
   })
 end
 
@@ -165,6 +177,7 @@ local function set_keymaps()
   set_dap_keymap()
   set_todo_comments_keymap()
   set_barbar_keymap()
+  set_fzf_keymap()
 end
 return {
   set_keymaps(),

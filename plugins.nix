@@ -5,6 +5,7 @@ with pkgs.vimPlugins; [
   nvim-web-devicons
   gruvbox-nvim
   # UI
+  fzf-lua
   glow-nvim
   telescope-ghq
   lualine-lsp-progress
@@ -24,6 +25,7 @@ with pkgs.vimPlugins; [
   comment-nvim
   nvim-autopairs
   indent-blankline-nvim-lua
+  # vim-doge
   (nvim-treesitter.withPlugins (
     p: [
       p.javascript
@@ -90,6 +92,7 @@ with pkgs.vimPlugins; [
   cmp-vsnip
   cmp-cmdline
   cmp-emoji
+  ChatGPT-nvim
 
   # rust
   rust-tools-nvim

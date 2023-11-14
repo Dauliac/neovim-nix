@@ -3,6 +3,6 @@
 ,
 }:
 pkgs.vimUtils.buildVimPlugin {
-  name = "gitlab.nvim";
+  name = "vim-doge";
   inherit src;
 }

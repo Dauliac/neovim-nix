@@ -52,6 +52,16 @@
     on_attach = require("lsp-format").on_attach
   }
 
+  require'lspconfig'.phan.setup {
+    capabilities = capabilities,
+    on_attach = require("lsp-format").on_attach
+  }
+
+  require'lspconfig'.phpactor.setup {
+    capabilities = capabilities,
+    on_attach = require("lsp-format").on_attach
+  }
+
   require'lspconfig'.terraformls.setup {
     capabilities = capabilities,
     on_attach = require("lsp-format").on_attach,

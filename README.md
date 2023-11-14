@@ -1,4 +1,4 @@
-# TonyChG neovim
+# Dauliac neovim
 
 This is a Nix flake which provides customized neovim.
 Neovim configuration is mainly focused on web development and DevOps.

@@ -1,15 +1,15 @@
 vim.cmd.syntax("on")
 
 -- Options
-vim.opt.clipboard:append({ 'unnamedplus' })
+vim.opt.clipboard:append({ "unnamedplus" })
 vim.opt.cc = "120"
 vim.opt.listchars = {
-    tab = "▸ ",
-    trail = "·",
-    extends = "»",
-    precedes = "«",
-    nbsp = "␣",
-    eol = "↲",
+  tab = "▸ ",
+  trail = "·",
+  extends = "»",
+  precedes = "«",
+  nbsp = "␣",
+  eol = "↲",
 }
 
 vim.keymap.set("i", "<Tab>", "vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'", { expr = true })
