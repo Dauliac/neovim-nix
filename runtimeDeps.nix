@@ -18,6 +18,7 @@ with pkgs; [
   alejandra
   rnix-lsp
   nixpkgs-fmt
+  nixfmt
   # rust
   rust-analyzer
   rustfmt
@@ -39,7 +40,9 @@ with pkgs; [
   nodePackages.typescript
   nodePackages."@volar/vue-language-server"
   # nulls
+  php83Packages.phpstan
   php83Packages.phan
   php83Packages.phpcs
   phpactor
+  python311Packages.pynvim
 ]

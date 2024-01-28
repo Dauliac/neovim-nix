@@ -3,6 +3,6 @@
 ,
 }:
 pkgs.vimUtils.buildVimPlugin {
-  name = "sonicpi-vim";
+  name = "phpactor";
   inherit src;
 }

@@ -59,7 +59,20 @@
 
   require'lspconfig'.phpactor.setup {
     capabilities = capabilities,
-    on_attach = require("lsp-format").on_attach
+    on_attach = require("lsp-format").on_attach,
+    init_options = {
+        -- TODO: setup phpactor_bin
+        -- language_server.phpactor_bin¶
+        ["language_server_configuration.auto_config"] = false,
+        ["language_server_phpstan.enabled"] = true,
+        ["language_server_phpstan.level"] = 10,
+        ["language_server_psalm.enabled"] = true,
+        ["symfony.enabled"] = true,
+        ["phpunit.enabled"] = true,
+        ["prophecy.enabled"] = true,
+        ["php_code_sniffer.enabled"] = true,
+        ["xdebug_disable"] = false,
+    }
   }
 
   require'lspconfig'.terraformls.setup {

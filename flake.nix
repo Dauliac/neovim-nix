@@ -2,12 +2,8 @@
   description = "Dauliac neovim flake";
 
   inputs = {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs";
-    };
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
+    nixpkgs = { url = "github:NixOS/nixpkgs"; };
+    flake-utils = { url = "github:numtide/flake-utils"; };
     neovim = {
       url = "github:neovim/neovim/v0.9.1?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,14 +18,6 @@
     };
     lsplens-src = {
       url = "github:VidocqH/lsp-lens.nvim";
-      flake = false;
-    };
-    gitlab-nvim-src = {
-      url = "github:harrisoncramer/gitlab.nvim";
-      flake = false;
-    };
-    sonic-pi-vim-src = {
-      url = "github:dermusikman/sonicpi.vim";
       flake = false;
     };
   };
@@ -55,24 +43,10 @@
                 src = inputs.telescope-ghq-src;
                 pkgs = prev;
               };
-              gitlab-nvim = import ./packages/vimPlugins/gitlabNvim.nix {
-                src = inputs.gitlab-nvim-src;
-                pkgs = prev;
-              };
-              sonic-pi-vim = import ./packages/vimPlugins/sonicpi-vim.nix {
-                src = inputs.sonic-pi-vim-src;
-                pkgs = prev;
-              };
-              # vim-doge = import ./packages/vimPlugins/vimDoge.nix {
-              #   src = inputs.vim-doge-src;
-              #   pkgs = prev;
-              # };
             };
         };
         overlayNeovimDauliac = prev: final: {
-          neovimDauliac = import ./packages/neovimDauliac.nix {
-            pkgs = prev;
-          };
+          neovimDauliac = import ./packages/neovimDauliac.nix { pkgs = prev; };
         };
 
         pkgs = import inputs.nixpkgs {
@@ -80,12 +54,9 @@
           overlays = [ overlayFlakeInputs overlayNeovimDauliac ];
         };
 
-        formatterPackages = with pkgs; [
-          nixpkgs-fmt
-          alejandra
-          statix
-        ];
-        nvim = inputs.flake-utils.lib.mkApp { drv = self.packages.${system}.nvim; };
+        formatterPackages = with pkgs; [ nixpkgs-fmt alejandra statix ];
+        nvim =
+          inputs.flake-utils.lib.mkApp { drv = self.packages.${system}.nvim; };
       in
       {
         packages = rec {
@@ -107,7 +78,7 @@
         };
 
         checks = {
-          inherit nvim;
+          inherit (self.packages.${system}) nvim;
           typos = pkgs.mkShell {
             buildInputs = with pkgs; [ typos ];
             shellHook = ''
@@ -128,21 +99,15 @@
           };
         };
 
-        devShells.default =
-          pkgs.mkShell
-            {
-              inputsFrom = builtins.attrValues self.checks.${system};
+        devShells.default = pkgs.mkShell {
+          inputsFrom = builtins.attrValues self.checks.${system};
 
-              nativeBuildInputs = with pkgs;
-                [
-                  lefthook
-                  go-task
-                ]
-                ++ formatterPackages;
+          nativeBuildInputs = with pkgs;
+            [ lefthook go-task ] ++ formatterPackages;
 
-              devShellHook = ''
-                task install
-              '';
-            };
+          devShellHook = ''
+            task install
+          '';
+        };
       });
 }

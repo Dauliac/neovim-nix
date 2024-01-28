@@ -49,6 +49,9 @@ local function set_nvim_tree_keymap()
 end
 
 local function set_spectre_keymap()
+  vim.keymap.set("n", "<leader>s", function() end, {
+    desc = "Spectre prefix",
+  })
   vim.keymap.set("n", "<leader>S", '<cmd>lua require("spectre").open()<CR>', {
     desc = "Open Spectre",
   })
@@ -64,6 +67,9 @@ local function set_spectre_keymap()
 end
 
 local function set_trouble_keymap()
+  vim.keymap.set("n", "<leader>x", function() end, {
+    desc = "Trouble prefix",
+  })
   vim.keymap.set("n", "<leader>xx", function()
     require("trouble").open()
   end, {
@@ -167,9 +173,29 @@ local function set_barbar_keymap()
   -- :BarbarDisable - very bad command, should never be used
 end
 
+local function set_undotree_keymap()
+  vim.keymap.set("n", "<leader>u", "<Cmd>UndotreeToggle<CR>", {
+    desc = "Toggle undotree",
+  })
+end
+
+local function set_zenmode_keymap()
+  vim.keymap.set("n", "<leader>z", "<Cmd>ZenMode<CR>", {
+    desc = "Toggle zenmode",
+  })
+end
+local function set_diffview_keymap()
+  vim.keymap.set("n", "<leader>D", "<Cmd>DiffviewFileHistory %<CR>", {
+    desc = "Toggle current file history",
+  })
+end
+
 local function set_keymaps()
   vim.g.mapleader = ","
 
+  vim.keymap.set("n", "<leader>f", function() end, {
+    desc = "telescope and fzf prefix",
+  })
   set_telescope_keymaps()
   set_nvim_tree_keymap()
   set_spectre_keymap()
@@ -178,6 +204,9 @@ local function set_keymaps()
   set_todo_comments_keymap()
   set_barbar_keymap()
   set_fzf_keymap()
+  set_undotree_keymap()
+  set_zenmode_keymap()
+  set_diffview_keymap()
 end
 return {
   set_keymaps(),
