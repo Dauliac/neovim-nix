@@ -4,4 +4,4 @@ vim.g.lazygit_floating_window_use_plenary = 0      -- use plenary.nvim to manage
 vim.g.lazygit_use_neovim_remote = 1                -- fallback to 0 if neovim-remote is not installed
 
 vim.g.lazygit_use_custom_config_file_path = 0      -- config file path is evaluated if this value is 1
-vim.g.lazygit_config_file_path = ''                -- custom config file path
+vim.g.lazygit_config_file_path = ""                -- custom config file path

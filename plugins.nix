@@ -19,6 +19,7 @@ with pkgs.vimPlugins; [
   lsp-colors-nvim
   todo-comments-nvim
   barbar-nvim
+  neoscroll-nvim
 
   nui-nvim
   noice-nvim
@@ -28,6 +29,7 @@ with pkgs.vimPlugins; [
   comment-nvim
   nvim-autopairs
   indent-blankline-nvim-lua
+  firenvim
   # vim-doge
   (nvim-treesitter.withPlugins (p: [
     p.javascript
@@ -98,6 +100,7 @@ with pkgs.vimPlugins; [
   cmp-cmdline
   cmp-emoji
   ChatGPT-nvim
+  indent-blankline-nvim-lua
   # rust
   rust-tools-nvim
 ]

@@ -16,7 +16,6 @@ with pkgs; [
   editorconfig-checker
   # nix
   alejandra
-  rnix-lsp
   nixpkgs-fmt
   nixfmt
   # rust
@@ -42,7 +41,7 @@ with pkgs; [
   # nulls
   php83Packages.phpstan
   php83Packages.phan
-  php83Packages.phpcs
+  php83Packages.php-codesniffer
   phpactor
   python311Packages.pynvim
 ]

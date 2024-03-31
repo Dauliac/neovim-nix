@@ -190,6 +190,27 @@ local function set_diffview_keymap()
   })
 end
 
+local function set_lazygit_keymap()
+  vim.keymap.set("n", "<leader>g", "<Cmd>LazyGit<CR>", {
+    desc = "Open lazygit",
+  })
+end
+
+local function set_chatgpt_keymap()
+  vim.keymap.set("n", "<leader>U", "<Cmd>ChatGPT<CR>", {
+    desc = "Open ChatGPT prompt",
+  })
+  vim.keymap.set("n", "<leader>I", "<Cmd>ChatGPTEditWithInstruction<CR>", {
+    desc = "Edit current selection with ChatGPT",
+  })
+  vim.keymap.set("n", "<leader>O", "<Cmd>ChatGPTRun docstring<CR>", {
+    desc = "Generate docstring",
+  })
+  vim.keymap.set("n", "<leader>P", "<Cmd>ChatGPTRun add_tests<CR>", {
+    desc = "Generate tests",
+  })
+end
+
 local function set_keymaps()
   vim.g.mapleader = ","
 
@@ -207,6 +228,8 @@ local function set_keymaps()
   set_undotree_keymap()
   set_zenmode_keymap()
   set_diffview_keymap()
+  set_lazygit_keymap()
+  set_chatgpt_keymap()
 end
 return {
   set_keymaps(),

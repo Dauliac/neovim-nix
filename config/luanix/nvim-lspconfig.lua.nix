@@ -171,6 +171,9 @@
       }
     }
   }
+  require('lspconfig').nil_ls.setup {
+    autostart = true,
+  }
 
   local rt = require("rust-tools")
 

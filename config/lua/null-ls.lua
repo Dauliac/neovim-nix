@@ -37,8 +37,10 @@ null_ls.setup({
     null_ls.builtins.formatting.sql_formatter,
     null_ls.builtins.formatting.terraform_fmt,
     null_ls.builtins.formatting.yamlfix,
-    null_ls.builtins.formatting.nixfmt,
+    null_ls.builtins.formatting.alejandra,
+    null_ls.builtins.formatting.statix,
     null_ls.builtins.formatting.shellharden,
     null_ls.builtins.hover.printenv,
+    null_ls.builtins.code_actions.statix,
   },
 })
