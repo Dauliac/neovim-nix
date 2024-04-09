@@ -1,27 +1,25 @@
-{ pkgs }:
-let
+{pkgs}: let
   nixFiles2ConfigFiles = dir:
     builtins.map
-      (file:
-        pkgs.writeTextFile {
-          name = pkgs.lib.strings.removeSuffix ".nix" file;
-          text = import ./${dir}/${file} { inherit pkgs; };
-        })
-      (builtins.attrNames (builtins.readDir ./${dir}));
+    (file:
+      pkgs.writeTextFile {
+        name = pkgs.lib.strings.removeSuffix ".nix" file;
+        text = import ./${dir}/${file} {inherit pkgs;};
+      })
+    (builtins.attrNames (builtins.readDir ./${dir}));
 
-  scripts2ConfigFiles = dir:
-    let
-      configDir = pkgs.stdenv.mkDerivation {
-        name = "nvim-${dir}-configs";
-        src = ./${dir};
-        installPhase = ''
-          mkdir -p $out/
-          cp ./* $out/
-        '';
-      };
-    in
+  scripts2ConfigFiles = dir: let
+    configDir = pkgs.stdenv.mkDerivation {
+      name = "nvim-${dir}-configs";
+      src = ./${dir};
+      installPhase = ''
+        mkdir -p $out/
+        cp ./* $out/
+      '';
+    };
+  in
     builtins.map (file: "${configDir}/${file}")
-      (builtins.attrNames (builtins.readDir configDir));
+    (builtins.attrNames (builtins.readDir configDir));
 
   sourceConfigFiles = files:
     builtins.concatStringsSep "\n" (builtins.map
@@ -38,5 +36,5 @@ let
   lua = scripts2ConfigFiles "lua";
   luanix = nixFiles2ConfigFiles "luanix";
 in
-builtins.concatStringsSep "\n"
-  (builtins.map sourceConfigFiles [ vim lua luanix ])
+  builtins.concatStringsSep "\n"
+  (builtins.map sourceConfigFiles [lua luanix])

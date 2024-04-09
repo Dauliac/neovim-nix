@@ -217,6 +217,11 @@ local function set_keymaps()
   vim.keymap.set("n", "<leader>f", function() end, {
     desc = "telescope and fzf prefix",
   })
+  vim.keymap.set("i", "<Tab>", "vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'", { expr = true })
+  vim.keymap.set("s", "<Tab>", "vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'", { expr = true })
+  vim.keymap.set("i", "<S-Tab>", "vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'", { expr = true })
+  vim.keymap.set("s", "<S-Tab>", "vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'", { expr = true })
+
   set_telescope_keymaps()
   set_nvim_tree_keymap()
   set_spectre_keymap()

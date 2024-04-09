@@ -12,7 +12,32 @@ vim.opt.listchars = {
   eol = "↲",
 }
 
-vim.keymap.set("i", "<Tab>", "vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'", { expr = true })
-vim.keymap.set("s", "<Tab>", "vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'", { expr = true })
-vim.keymap.set("i", "<S-Tab>", "vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'", { expr = true })
-vim.keymap.set("s", "<S-Tab>", "vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'", { expr = true })
+vim.cmd("syntax on")
+vim.cmd("filetype plugin indent on")
+
+vim.o.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.shiftwidth = 2
+vim.o.expandtab = true
+vim.o.smartindent = true
+vim.wo.number = true
+vim.o.exrc = true
+vim.o.secure = true
+vim.o.termguicolors = true
+vim.o.hlsearch = false
+vim.o.hidden = true
+vim.o.guicursor = ""
+vim.o.scrolloff = 0
+vim.wo.signcolumn = "yes"
+vim.o.undofile = true
+vim.o.incsearch = true
+vim.o.updatetime = 50
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.wo.relativenumber = true
+vim.o.sessionoptions = "tabpages,globals"
+vim.o.ignorecase = true
+vim.o.swapfile = false
+vim.o.laststatus = 3
+vim.o.re = 0
+vim.o.eol = true

@@ -1,9 +1,9 @@
-{ pkgs }:
+{pkgs}:
 with pkgs.vimPlugins; [
   #  Style
   which-key-nvim
   nvim-web-devicons
-  gruvbox-nvim
+  catppuccin-nvim
   # UI
   fzf-lua
   glow-nvim

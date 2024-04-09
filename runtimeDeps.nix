@@ -1,4 +1,4 @@
-{ pkgs }:
+{pkgs}:
 with pkgs; [
   fd
   ghq
@@ -18,6 +18,7 @@ with pkgs; [
   alejandra
   nixpkgs-fmt
   nixfmt
+  nil
   # rust
   rust-analyzer
   rustfmt
