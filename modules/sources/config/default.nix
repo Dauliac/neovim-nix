@@ -32,9 +32,7 @@
         + " ${file}")
       files);
 
-  vim = scripts2ConfigFiles "vim";
   lua = scripts2ConfigFiles "lua";
-  luanix = nixFiles2ConfigFiles "luanix";
 in
   builtins.concatStringsSep "\n"
-  (builtins.map sourceConfigFiles [lua luanix])
+  (builtins.map sourceConfigFiles [lua])
